@@ -22,6 +22,6 @@ namespace lib_dominio.Entidades
 
         //public List<Usuarios>? Usuarios { get; set; }
         //public List<Prestamos_Libros>? Prestamos_Libros { get; set; }
-
+        //ultimo cambio
     }
 }
