@@ -15,7 +15,7 @@ namespace lib_dominio.Entidades
         public string? referencia { get; set; }//SERIA EL ID 
         public string? accion { get; set; }
 
-        public string? usuarios { get; set; } //ESTO SI DEBE IR 
+        public string? Usuarios { get; set; } //ESTO SI DEBE IR 
 
        //prueba
 
