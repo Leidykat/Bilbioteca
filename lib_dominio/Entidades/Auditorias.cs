@@ -17,7 +17,7 @@ namespace lib_dominio.Entidades
 
         public string? usuarios { get; set; } //ESTO SI DEBE IR 
 
-       
+       //prueba
 
     }
 }
