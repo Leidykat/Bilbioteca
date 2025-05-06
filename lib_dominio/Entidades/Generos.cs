@@ -14,4 +14,5 @@ namespace lib_dominio.Entidades
        // public List<Libros_Generos>? Libros_Generos { get; set; }
     }
     //NO SE QUE PONER 
+
 }
