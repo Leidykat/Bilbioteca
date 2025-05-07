@@ -43,7 +43,7 @@ Global
 		{402131CE-5758-43F7-9503-C34786D47E89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
+	HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{86A8AEF4-AFDA-4DC3-831F-D35487D9932D} = {C01BD4A8-92BF-4119-A7D6-AAAF1535914C}
