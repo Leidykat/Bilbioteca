@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using lib_aplicaciones.Interfaces;
 using lib_dominio.Entidades;
 using lib_repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace lib_aplicaciones.Implementaciones
 {
-    public class AutoresAplicacion
+    public class AutoresAplicacion : IAutoresAplicacion
     {
         private IConexion? IConexion = null;
         public AutoresAplicacion(IConexion iConexion)

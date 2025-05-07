@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using lib_aplicaciones.Interfaces;
 using lib_dominio.Entidades;
 using lib_repositorios.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace lib_aplicaciones.Implementaciones
 {
-    public class EditorialesAplicacion
+    public class EditorialesAplicacion : IEditorialesAplicacion
     {
         private IConexion? IConexion = null;
         public EditorialesAplicacion(IConexion iConexion)
