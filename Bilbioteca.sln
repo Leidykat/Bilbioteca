@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ut_presentacion", "ut_prese
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "lib_aplicaciones", "lib_aplicaciones\lib_aplicaciones.csproj", "{402131CE-5758-43F7-9503-C34786D47E89}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "asp_servicios", "asp_servicios\asp_servicios.csproj", "{38B03DB5-13CF-43A0-9BA1-102D3390CAEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{402131CE-5758-43F7-9503-C34786D47E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{402131CE-5758-43F7-9503-C34786D47E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{402131CE-5758-43F7-9503-C34786D47E89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38B03DB5-13CF-43A0-9BA1-102D3390CAEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38B03DB5-13CF-43A0-9BA1-102D3390CAEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38B03DB5-13CF-43A0-9BA1-102D3390CAEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38B03DB5-13CF-43A0-9BA1-102D3390CAEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +56,7 @@ Global
 		{2A46C0D4-A3E1-4BD8-8183-FD2656AC991A} = {28CF2AD1-6264-49E6-9A86-19508B590C5F}
 		{DBAEF232-8B4A-4177-8007-1C9C39531685} = {4E89DD16-64A6-4CD8-80F2-EC7899D1B4C5}
 		{402131CE-5758-43F7-9503-C34786D47E89} = {28CF2AD1-6264-49E6-9A86-19508B590C5F}
+		{38B03DB5-13CF-43A0-9BA1-102D3390CAEA} = {28CF2AD1-6264-49E6-9A86-19508B590C5F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {98AA3E09-9A0F-4273-BD94-49CB977A30EB}
