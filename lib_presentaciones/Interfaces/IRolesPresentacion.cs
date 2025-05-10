@@ -2,7 +2,7 @@
 
 namespace lib_presentaciones.Interfaces
 {
-    public interface IUsuariosPresentacion
+    public interface IRolesPresentacion
     {
         Task<List<Usuarios>> Listar();
         Task<List<Usuarios>> PorNombre(Usuarios? entidad);
