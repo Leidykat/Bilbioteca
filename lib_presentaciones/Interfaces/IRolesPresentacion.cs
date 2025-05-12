@@ -4,10 +4,10 @@ namespace lib_presentaciones.Interfaces
 {
     public interface IRolesPresentacion
     {
-        Task<List<Usuarios>> Listar();
-        Task<List<Usuarios>> PorNombre(Usuarios? entidad);
-        Task<Usuarios?> Guardar(Usuarios? entidad);
-        Task<Usuarios?> Modificar(Usuarios? entidad);
-        Task<Usuarios?> Borrar(Usuarios? entidad);
+        Task<List<Roles>> Listar();
+        Task<List<Roles>> PorNombre(Roles? entidad);
+        Task<Roles?> Guardar(Roles? entidad);
+        Task<Roles?> Modificar(Roles? entidad);
+        Task<Roles?> Borrar(Roles? entidad);
     }
 }
