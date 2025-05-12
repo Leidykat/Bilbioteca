@@ -2,11 +2,11 @@
 
 namespace lib_presentaciones.Interfaces
 {
-    public interface IAutoresPresentacion
+    public interface ILibros_AutoresPresentacion
     {
-        Task<List<Autores>> Listar();
-        Task<Autores?> Guardar(Autores? entidad);
-        Task<Autores?> Modificar(Autores? entidad);
-        Task<Autores?> Borrar(Autores? entidad);
+        Task<List<Libros_Autores>> Listar();
+        Task<Libros_Autores?> Guardar(Libros_Autores? entidad);
+        Task<Libros_Autores?> Modificar(Libros_Autores? entidad);
+        Task<Libros_Autores?> Borrar(Libros_Autores? entidad);
     }
 }

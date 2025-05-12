@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\lib_dominio\lib_dominio.csproj" />
+  </ItemGroup>
+
 </Project>
