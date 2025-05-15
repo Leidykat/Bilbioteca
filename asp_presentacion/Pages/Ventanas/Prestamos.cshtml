@@ -56,25 +56,15 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
             {
                 <div class="containers_vn panel panel-default">
-                    <h3>Casa</h3>
+                    <h3>Prestamos</h3>
 
                     <div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Id
+                                Código
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmEstudiante"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.id" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Codigo
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmMateria"
+                                <input id="nmCodigo"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.codigo" />
                             </div>
@@ -84,17 +74,17 @@
                                 Fecha prestamo
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmNota1"
+                                <input id="nmFechaPrestamo"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.fecha_prestamo" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Fecha devolucion
+                                Fecha devolución
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmNota1"
+                                <input id="nmFechaDevolucion"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.fecha_devolucion" />
                             </div>
@@ -147,18 +137,15 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
             Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
-                <input id="flNombre"
+                <input id="flCodigo"
                        class="cts_forms form-control"
                        asp-for="@Model.Filtro!.id"
-                       placeholder="Nombre" />
+                       placeholder="Codigo" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
                     <table class="tb_data table table-striped table-bordered table-hover">
                         <tr>
-                            <th>
-                                Id
-                            </th>
                             <th>
                                 Codigo
                             </th>
@@ -176,9 +163,6 @@
                             @foreach (var elemento in Model.Lista)
                             {
                                 <tr>
-                                    <td>
-                                        @elemento.id
-                                    </td>
                                     <td>
                                         @elemento.codigo
                                     </td>

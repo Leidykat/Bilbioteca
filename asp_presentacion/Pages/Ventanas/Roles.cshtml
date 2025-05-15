@@ -61,35 +61,25 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
             {
                 <div class="containers_vn panel panel-default">
-                    <h3>Casa</h3>
+                    <h3>Roles</h3>
 
                     <div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Id
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmEstudiante"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.id" />
-                            </div>
-                        </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
                                 Nombre
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmMateria"
+                                <input id="nmNombre"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.nombre" />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Descripcion
+                                Descripción
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmMateria"
+                                <input id="nmDescripcion"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.descripcion" />
                             </div>
@@ -154,9 +144,6 @@
                     <table class="tb_data table table-striped table-bordered table-hover">
                         <tr>
                             <th>
-                                Id
-                            </th>
-                            <th>
                                 Nombre
                             </th>
                             <th class="cl_hidden">
@@ -169,9 +156,6 @@
                             @foreach (var elemento in Model.Lista)
                             {
                                 <tr>
-                                    <td>
-                                        @elemento.id
-                                    </td>
                                     <td>
                                         @elemento.nombre
                                     </td>
