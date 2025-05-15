@@ -57,25 +57,15 @@
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
             {
                 <div class="containers_vn panel panel-default">
-                    <h3>Casa</h3>
+                    <h3>Libros</h3>
 
                     <div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
-                                Id
+                                Título
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmEstudiante"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.id" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Titulo
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmMateria"
+                                <input id="nmTitulo"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.titulo" />
                             </div>
@@ -85,7 +75,7 @@
                                 Cantidad
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmNota1"
+                                <input id="nmCantidad"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.cantidad" />
                             </div>
@@ -95,7 +85,7 @@
                                 Estado
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmNota1"
+                                <input id="nmEstado"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.estado" />
                             </div>
@@ -105,7 +95,7 @@
                                 Año de publicacion
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmNota1"
+                                <input id="nmAñoPublicacion"
                                        class="cts_forms form-control"
                                        asp-for="@Model.Actual!.año_publicacion" />
                             </div>
@@ -167,10 +157,7 @@
                     <table class="tb_data table table-striped table-bordered table-hover">
                         <tr>
                             <th>
-                                Id
-                            </th>
-                            <th>
-                                Titulo
+                                Título
                             </th>
                               <th>
                                 Cantidad
@@ -179,7 +166,7 @@
                                 Estado
                             </th>
                             <th class="cl_hidden">
-                                Ano publicacion
+                                Año publicación
                             </th>
                         </tr>
                         @if (Model != null && Model.Lista != null)
@@ -187,9 +174,6 @@
                             @foreach (var elemento in Model.Lista)
                             {
                                 <tr>
-                                    <td>
-                                        @elemento.id
-                                    </td>
                                     <td>
                                         @elemento.titulo
                                     </td>

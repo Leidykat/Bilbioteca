@@ -1,7 +1,6 @@
 ﻿using asp_servicios.Controllers;
 using lib_aplicaciones.Implementaciones;
 using lib_aplicaciones.Interfaces;
-using lib_repositorios;
 using lib_repositorios.Implementaciones;
 using lib_repositorios.Interfaces;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
@@ -40,18 +39,20 @@ namespace asp_servicios
             services.AddScoped<TokenController, TokenController>();
             services.AddCors(o => o.AddDefaultPolicy(b => b.AllowAnyOrigin()));
         }
-        public void Configure(WebApplication app, IWebHostEnvironment env) 
-        { 
+        public void Configure(WebApplication app, IWebHostEnvironment env)
+        {
             if (env.IsDevelopment())
             {
-                //app.UseSwagger(); 
+                //app.UseSwagger();
                 //app.UseSwaggerUI();
+            }
+            if (!app.Environment.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Error");
             }
             app.UseHttpsRedirection();
             app.UseAuthorization();
             app.MapControllers();
-            app.Run();
-            app.UseRouting();
             app.UseCors();
         }
     }
