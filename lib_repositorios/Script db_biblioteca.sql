@@ -153,4 +153,4 @@ GO
 select *from Editoriales
 
 
-//HACER TABLA DE AUDITORIAS 
+--HACER TABLA DE AUDITORIAS 
