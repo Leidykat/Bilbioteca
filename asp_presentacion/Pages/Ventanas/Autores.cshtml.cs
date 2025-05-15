@@ -9,12 +9,14 @@ namespace asp_presentacion.Pages.Ventanas
     public class AutoresModel : PageModel
     {
         private IAutoresPresentacion? iPresentacion = null;
+        //SI SE NECESITA OTRO SE AGREGA COMO ^
 
         public AutoresModel(IAutoresPresentacion iPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
+                //AGREGAR AQUI TAMBIÉN ^
                 Filtro = new Autores();
             }
             catch (Exception ex)
@@ -28,6 +30,7 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Autores? Actual { get; set; }
         [BindProperty] public Autores? Filtro { get; set; }
         [BindProperty] public List<Autores>? Lista { get; set; }
+        //^
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -48,6 +51,7 @@ namespace asp_presentacion.Pages.Ventanas
                 var task = this.iPresentacion!.PorUsuario(Filtro!);
                 task.Wait();
                 Lista = task.Result;
+                //^
                 Actual = null;
             }
             catch (Exception ex)

@@ -59,6 +59,7 @@ namespace lib_aplicaciones.Implementaciones
 
         public List<Autores> PorUsuario(Autores? entidad)
         {
+
             return this.IConexion!.Autores!.Where(x => x.nombre!.Contains(entidad!.nombre!)).ToList();
         }
 
