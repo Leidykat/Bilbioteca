@@ -56,7 +56,7 @@ namespace lib_presentaciones.Implementaciones
             datos["Entidad"] = entidad!;
 
             comunicaciones = new Comunicaciones();
-            datos = comunicaciones.ConstruirUrl(datos, "Roles/PorCodigo");
+            datos = comunicaciones.ConstruirUrl(datos, "Roles/PorNombre");
             var respuesta = await comunicaciones!.Ejecutar(datos);
 
             if (respuesta.ContainsKey("Error"))

@@ -17,6 +17,7 @@ namespace asp_servicios.Controllers
             TokenController tokenController)
         {
             this.iAplicacion = iAplicacion;
+            this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion")!);
             this.tokenController = tokenController;
         }
 
