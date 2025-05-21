@@ -13,7 +13,7 @@ namespace lib_aplicaciones.Implementaciones
     public class PrestamosAplicacion : IPrestamosAplicacion
     {
         private IConexion? IConexion = null;
-        public PrestamosAplicacion(IConexion iConexion)
+        public PrestamosAplicacion(IConexion iConexion) 
 
         {
             this.IConexion = iConexion;
@@ -64,6 +64,7 @@ namespace lib_aplicaciones.Implementaciones
 
         public List<Prestamos> PorCodigo(Prestamos? entidad)
         {
+            Console.WriteLine("AP´li");
             return this.IConexion!.Prestamos!.Where(x => x.codigo!.Contains(entidad!.codigo!)).ToList();
         }
 

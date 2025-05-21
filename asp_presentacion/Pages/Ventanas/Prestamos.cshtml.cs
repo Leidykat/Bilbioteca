@@ -41,9 +41,8 @@ namespace asp_presentacion.Pages.Ventanas
                 //    HttpContext.Response.Redirect("/");
                 //    return;
                 //}
-
+                
                 Filtro!.codigo = Filtro!.codigo ?? "";
-
                 Accion = Enumerables.Ventanas.Listas;
                 var task = this.iPresentacion!.PorCodigo(Filtro!);
                 task.Wait();

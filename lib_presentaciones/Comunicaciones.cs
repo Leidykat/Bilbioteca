@@ -11,7 +11,7 @@ namespace lib_presentaciones
 
         public Comunicaciones(string servicio = "",
             string protocolo = "http://", 
-            string host = "localhost:5036")
+            string host = "localhost:5124")
         {
             Protocolo = protocolo;
             Host = host;
@@ -45,6 +45,7 @@ namespace lib_presentaciones
                 httpClient.Timeout = new TimeSpan(0, 4, 0);
 
                 var message = await httpClient.PostAsync(url, new StringContent(stringData));
+
 
                 if (!message.IsSuccessStatusCode)
                 {
@@ -84,6 +85,7 @@ namespace lib_presentaciones
                 var httpClient = new HttpClient();
                 httpClient.Timeout = new TimeSpan(0, 1, 0);
                 var mensaje = await httpClient.PostAsync(url, new StringContent(stringData));
+
 
                 if (!mensaje.IsSuccessStatusCode)
                 {
