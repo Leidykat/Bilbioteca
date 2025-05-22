@@ -1,5 +1,6 @@
 using lib_dominio.Entidades;
 using lib_dominio.Nucleo;
+using lib_presentaciones.Implementaciones;
 using lib_presentaciones.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -9,12 +10,14 @@ namespace asp_presentacion.Pages.Ventanas
     public class UsuariosModel : PageModel
     {
         private IUsuariosPresentacion? iPresentacion = null;
+        private IRolesPresentacion? iRolesPresentacion = null;
 
-        public UsuariosModel(IUsuariosPresentacion iPresentacion)
+        public UsuariosModel(IUsuariosPresentacion iPresentacion, IRolesPresentacion iRolesPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
+                this.iRolesPresentacion = iRolesPresentacion;
                 Filtro = new Usuarios();
             }
             catch (Exception ex)
@@ -28,6 +31,8 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Usuarios? Actual { get; set; }
         [BindProperty] public Usuarios? Filtro { get; set; }
         [BindProperty] public List<Usuarios>? Lista { get; set; }
+        [BindProperty] public List<Roles>? Roles { get; set; }
+
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -35,12 +40,12 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
-                //var variable_session = HttpContext.Session.GetString("Usuario");
-                //if (String.IsNullOrEmpty(variable_session))
-                //{
-                //    HttpContext.Response.Redirect("/");
-                //    return;
-                //}
+                var variable_session = HttpContext.Session.GetString("Usuario");
+                if (String.IsNullOrEmpty(variable_session))
+                {
+                    HttpContext.Response.Redirect("/");
+                    return;
+                }
 
                 Filtro!.nombre = Filtro!.nombre ?? "";
 
@@ -56,12 +61,27 @@ namespace asp_presentacion.Pages.Ventanas
             }
         }
 
+        private void CargarCombox()
+        {
+            try
+            {
+                var task = this.iRolesPresentacion!.Listar();
+                task.Wait();
+                Roles = task.Result;
+            }
+            catch (Exception ex)
+            {
+                LogConversor.Log(ex, ViewData!);
+            }
+        }
+
         public virtual void OnPostBtNuevo()
         {
             try
             {
                 Accion = Enumerables.Ventanas.Editar;
                 Actual = new Usuarios();
+                CargarCombox();
             }
             catch (Exception ex)
             {
@@ -74,6 +94,7 @@ namespace asp_presentacion.Pages.Ventanas
             try
             {
                 OnPostBtRefrescar();
+                CargarCombox();
                 Accion = Enumerables.Ventanas.Editar;
                 Actual = Lista!.FirstOrDefault(x => x.id.ToString() == data);
             }

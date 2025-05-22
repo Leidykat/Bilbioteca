@@ -59,12 +59,12 @@ namespace lib_aplicaciones.Implementaciones
 
         public List<Usuarios> Listar()
         {
-            return this.IConexion!.Usuarios!.Take(20).ToList();
+            return this.IConexion!.Usuarios!.Take(20).Include(x => x._Roles).ToList();
         }
 
         public List<Usuarios> PorNombre(Usuarios? entidad)
         {
-            return this.IConexion!.Usuarios!.Where(x => x.nombre!.Contains(entidad!.nombre!)).ToList();
+            return this.IConexion!.Usuarios!.Where(x => x.nombre!.Contains(entidad!.nombre!)).Include(x => x._Roles).ToList();
         }
 
         public Usuarios? Modificar(Usuarios? entidad)

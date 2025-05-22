@@ -1,6 +1,7 @@
 ﻿@page
 @model asp_presentacion.Pages.Ventanas.UsuariosModel
 @{
+    ViewData["Titulo"] = "Usuarios";
 }
 <center>
     <div>
@@ -40,29 +41,23 @@
             {
                 <input type="hidden"
                        asp-for="@Model.Actual!.id" />
-            }
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
+            
                 <input type="hidden"
                        asp-for="@Model.Actual!.nombre" />
 
-            }
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
+            
                 <input type="hidden"
                        asp-for="@Model.Actual!.apellido" />
 
-            }
-             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
                 <input type="hidden"
                        asp-for="@Model.Actual!.correo" />
 
-            }
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
+           
                 <input type="hidden"
                        asp-for="@Model.Actual!.telefono" />
+
+                <input type="hidden"
+                       asp-for="@Model.Actual!.id_roles" />
 
             }
 
@@ -113,6 +108,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">
+                                Rol
+                            </label>
+                            <div class="col-lg-6">
+                                <select id="nmRol"
+                                        class="form-control"
+                                        asp-for="@Model.Actual!.id_roles"
+                                        asp-items="@(new SelectList(Model.Roles, "id", "nombre"))">
+                                </select>
+                            </div>
+                        </div>
 
 
 
@@ -184,7 +191,12 @@
                                 Teléfono
 
                             </th>
+
+                            <th class="cl_actions">
+                                Rol
+                            </th>
                         </tr>
+
                         @if (Model != null && Model.Lista != null)
                         {
                             @foreach (var elemento in Model.Lista)
@@ -204,6 +216,10 @@
 
                                     <td class="cl_hidden">
                                         @elemento.telefono
+                                    </td>
+
+                                    <td class="cl_hidden">
+                                        @elemento._Roles!.nombre
                                     </td>
 
                                     <td>
