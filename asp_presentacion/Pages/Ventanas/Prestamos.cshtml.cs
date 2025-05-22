@@ -9,12 +9,15 @@ namespace asp_presentacion.Pages.Ventanas
     public class PrestamosModel : PageModel
     {
         private IPrestamosPresentacion? iPresentacion = null;
+        private IUsuariosPresentacion? iUsuariosPresentacion = null;
 
-        public PrestamosModel(IPrestamosPresentacion iPresentacion)
+        public PrestamosModel(IPrestamosPresentacion iPresentacion,
+            IUsuariosPresentacion iUsuariosPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
+                this.iUsuariosPresentacion = iUsuariosPresentacion;
                 Filtro = new Prestamos();
             }
             catch (Exception ex)
@@ -28,6 +31,7 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Prestamos? Actual { get; set; }
         [BindProperty] public Prestamos? Filtro { get; set; }
         [BindProperty] public List<Prestamos>? Lista { get; set; }
+        [BindProperty] public List<Usuarios>? Usuarios { get; set; }
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -35,13 +39,13 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
-                //var variable_session = HttpContext.Session.GetString("Usuario");
-                //if (String.IsNullOrEmpty(variable_session))
-                //{
-                //    HttpContext.Response.Redirect("/");
-                //    return;
-                //}
-                
+                var variable_session = HttpContext.Session.GetString("Usuario");
+                if (String.IsNullOrEmpty(variable_session))
+                {
+                    HttpContext.Response.Redirect("/");
+                    return;
+                }
+
                 Filtro!.codigo = Filtro!.codigo ?? "";
                 Accion = Enumerables.Ventanas.Listas;
                 var task = this.iPresentacion!.PorCodigo(Filtro!);
@@ -54,6 +58,21 @@ namespace asp_presentacion.Pages.Ventanas
                 LogConversor.Log(ex, ViewData!);
             }
         }
+
+        private void CargarCombox()
+        {
+            try
+            {
+                var task = this.iUsuariosPresentacion!.Listar();
+                task.Wait();
+                Usuarios = task.Result;
+            }
+            catch (Exception ex)
+            {
+                LogConversor.Log(ex, ViewData!);
+            }
+        }
+
 
         public virtual void OnPostBtNuevo()
         {
@@ -73,6 +92,7 @@ namespace asp_presentacion.Pages.Ventanas
             try
             {
                 OnPostBtRefrescar();
+                CargarCombox();
                 Accion = Enumerables.Ventanas.Editar;
                 Actual = Lista!.FirstOrDefault(x => x.id.ToString() == data);
             }
