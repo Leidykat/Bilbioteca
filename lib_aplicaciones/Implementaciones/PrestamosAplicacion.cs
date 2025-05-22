@@ -59,13 +59,12 @@ namespace lib_aplicaciones.Implementaciones
 
         public List<Prestamos> Listar()
         {
-            return this.IConexion!.Prestamos!.Take(20).ToList();
+            return this.IConexion!.Prestamos!.Take(20).Include(x => x._usuarios).ToList();
         }
 
         public List<Prestamos> PorCodigo(Prestamos? entidad)
         {
-            Console.WriteLine("AP´li");
-            return this.IConexion!.Prestamos!.Where(x => x.codigo!.Contains(entidad!.codigo!)).ToList();
+            return this.IConexion!.Prestamos!.Where(x => x.codigo!.Contains(entidad!.codigo!)).Include(x => x._usuarios).ToList();
         }
 
         public Prestamos? Modificar(Prestamos? entidad)

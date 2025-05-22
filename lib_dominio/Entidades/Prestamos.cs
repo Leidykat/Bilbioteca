@@ -16,8 +16,7 @@ namespace lib_dominio.Entidades
         public DateTime fecha_devolucion { get; set; }
         public int id_usuarios { get; set; }
 
-        [ForeignKey("id_usuarios")]
-        public Usuarios? Usuarios { get; set; }
+        [ForeignKey("id_usuarios")] public Usuarios? _usuarios { get; set; }
         //public Usuarios? _id_usuarios { get; set; }
 
         //public List<Usuarios>? Usuarios { get; set; }
