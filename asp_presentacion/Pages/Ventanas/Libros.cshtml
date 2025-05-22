@@ -51,6 +51,9 @@
                        asp-for="@Model.Actual!.estado" />
                 <input type="hidden"
                        asp-for="@Model.Actual!.año_publicacion" />
+                <input type="hidden"
+                       asp-for="@Model.Actual!.id_editoriales " />
+
                 
             }
 
@@ -100,6 +103,18 @@
                                        asp-for="@Model.Actual!.año_publicacion" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-lg-4 control-label">
+                                Editorial
+                            </label>
+                            <div class="col-lg-6">
+                                <input id="nmId_editoriales"
+                                       class="cts_forms form-control"
+                                       asp-for="@Model.Actual!.id_editoriales" />
+                                asp-items="@(new SelectList(Model.Editoriales, "Id", "Nombre"))">
+                            </div>
+                        </div>
+
                      
                     </div>
                 </div>
@@ -168,6 +183,9 @@
                             <th class="cl_hidden">
                                 Año publicación
                             </th>
+                            <th class="cl_hidden">
+                                Editorial
+                            </th>
                         </tr>
                         @if (Model != null && Model.Lista != null)
                         {
@@ -186,7 +204,9 @@
                                     <td class="cl_hidden">
                                         @elemento.año_publicacion
                                     </td>
-
+                                    <td class="cl_hidden">
+                                        @elemento.id_editoriales
+                                    </td>
                                     <td>
                                         <input type="submit"
                                                value="Modicar"

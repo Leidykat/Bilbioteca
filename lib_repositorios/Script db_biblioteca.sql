@@ -96,7 +96,7 @@ GO
 INSERT INTO [Generos] ([nombre], [descripcion]) 
 VALUES ('Acción', 'Género lleno de emociones, enfrentamientos y desafíos intensos');
 INSERT INTO [Generos] ([nombre], [descripcion]) 
-VALUES ('Fantasía', 'Mundo imaginario con magia, criaturas y aventuras sobrenaturales"');
+VALUES ('Fantasía', 'Mundo imaginario con magia, criaturas y aventuras sobrenaturales');
 GO
 
 INSERT INTO [Autores] ([nombre], [apellido]) 

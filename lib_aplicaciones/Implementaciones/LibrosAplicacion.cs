@@ -59,12 +59,13 @@ namespace lib_aplicaciones.Implementaciones
 
         public List<Libros> Listar()
         {
-            return this.IConexion!.Libros!.Take(20).ToList();
+
+            return this.IConexion!.Libros!.Take(20).Include(x => x._id_editoriales).ToList();
         }
 
         public List<Libros> PorUsuario(Libros? entidad)
         {
-            return this.IConexion!.Libros!.Where(x => x.titulo!.Contains(entidad!.titulo!)).ToList();
+            return this.IConexion!.Libros!.Where(x => x.titulo!.Contains(entidad!.titulo!)).Include(x => x._id_editoriales).ToList();
         }
 
         public Libros? Modificar(Libros? entidad)
