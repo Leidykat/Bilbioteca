@@ -14,7 +14,7 @@ namespace lib_dominio.Entidades
         public string? apellido { get; set; }
         //public List<Libros_Autores>? Libros_Autores { get; set; }
 
-        //Try
+        
 
     }
 }

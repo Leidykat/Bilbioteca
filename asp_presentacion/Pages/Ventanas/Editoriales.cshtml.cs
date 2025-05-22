@@ -27,7 +27,7 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Enumerables.Ventanas Accion { get; set; }
         [BindProperty] public Editoriales? Actual { get; set; }
         [BindProperty] public Editoriales? Filtro { get; set; }
-        [BindProperty] public List<Editoriales>? Lista { get; set; }
+        [BindProperty] public List<Editoriales>? Editoriales { get; set; }
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -47,7 +47,7 @@ namespace asp_presentacion.Pages.Ventanas
                 Accion = Enumerables.Ventanas.Listas;
                 var task = this.iPresentacion!.PorUsuario(Filtro!);
                 task.Wait();
-                Lista = task.Result;
+                Editoriales = task.Result;
                 Actual = null;
             }
             catch (Exception ex)
@@ -75,7 +75,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 OnPostBtRefrescar();
                 Accion = Enumerables.Ventanas.Editar;
-                Actual = Lista!.FirstOrDefault(x => x.id.ToString() == data);
+                Actual = Editoriales!.FirstOrDefault(x => x.id.ToString() == data);
             }
             catch (Exception ex)
             {
@@ -111,7 +111,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 OnPostBtRefrescar();
                 Accion = Enumerables.Ventanas.Borrar;
-                Actual = Lista!.FirstOrDefault(x => x.id.ToString() == data);
+                Actual = Editoriales!.FirstOrDefault(x => x.id.ToString() == data);
             }
             catch (Exception ex)
             {

@@ -9,12 +9,15 @@ namespace asp_presentacion.Pages.Ventanas
     public class LibrosModel : PageModel
     {
         private ILibrosPresentacion? iPresentacion = null;
+        private IEditorialesPresentacion? iEditorialesPresentacion = null;
 
-        public LibrosModel(ILibrosPresentacion iPresentacion)
+        public LibrosModel(ILibrosPresentacion iPresentacion,
+            IEditorialesPresentacion iEditorialesPresentacion)
         {
             try
             {
                 this.iPresentacion = iPresentacion;
+                this.iEditorialesPresentacion = iEditorialesPresentacion;
                 Filtro = new Libros();
             }
             catch (Exception ex)
@@ -28,6 +31,8 @@ namespace asp_presentacion.Pages.Ventanas
         [BindProperty] public Libros? Actual { get; set; }
         [BindProperty] public Libros? Filtro { get; set; }
         [BindProperty] public List<Libros>? Lista { get; set; }
+        [BindProperty] public List<Editoriales>? Editoriales { get; set; }
+
 
         public virtual void OnGet() { OnPostBtRefrescar(); }
 
@@ -56,6 +61,20 @@ namespace asp_presentacion.Pages.Ventanas
             }
         }
 
+        private void CargarCombox()
+        {
+            try
+            {
+                var task = this.iEditorialesPresentacion!.Listar();
+                task.Wait();
+                Editoriales = task.Result;
+            }
+            catch (Exception ex)
+            {
+                LogConversor.Log(ex, ViewData!);
+            }
+        }
+
         public virtual void OnPostBtNuevo()
         {
             try
@@ -74,6 +93,7 @@ namespace asp_presentacion.Pages.Ventanas
             try
             {
                 OnPostBtRefrescar();
+                CargarCombox();
                 Accion = Enumerables.Ventanas.Editar;
                 Actual = Lista!.FirstOrDefault(x => x.id.ToString() == data);
             }
