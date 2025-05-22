@@ -1,6 +1,7 @@
 ﻿@page
 @model asp_presentacion.Pages.Ventanas.LibrosModel
 @{
+    ViewData["Titulo"] = "Libros";
 }
 <center>
     <div>
@@ -36,7 +37,7 @@
             </div>
 
             @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-            Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
                        asp-for="@Model.Actual!.id" />
@@ -108,10 +109,11 @@
                                 Editorial
                             </label>
                             <div class="col-lg-6">
-                                <input id="nmId_editoriales"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.id_editoriales" />
-                                asp-items="@(new SelectList(Model.Editoriales, "Id", "Nombre"))">
+                                <select id="nmEditorial"
+                                        class="form-control"
+                                        asp-for="@Model.Actual!.id_editoriales"
+                                        asp-items="@(new SelectList(Model.Editoriales, "id", "nombre"))">
+                                </select>
                             </div>
                         </div>
 
@@ -183,7 +185,7 @@
                             <th class="cl_hidden">
                                 Año publicación
                             </th>
-                            <th class="cl_hidden">
+                            <th class="cl_actions">
                                 Editorial
                             </th>
                         </tr>
@@ -205,11 +207,11 @@
                                         @elemento.año_publicacion
                                     </td>
                                     <td class="cl_hidden">
-                                        @elemento.id_editoriales
+                                        @elemento._id_editoriales!.nombre
                                     </td>
                                     <td>
                                         <input type="submit"
-                                               value="Modicar"
+                                               value="Modificar"
                                                asp-page-handler="BtModificar"
                                                class="btn btn-secondary"
                                                asp-route-data="@elemento.id" />
