@@ -47,6 +47,7 @@ GO
 CREATE TABLE [Libros] (
 	[id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[titulo] NVARCHAR(50) NOT NULL,
+	[imagen] NVARCHAR(200),
 	[cantidad] INT NOT NULL,
 	[estado] NVARCHAR(50) NOT NULL,
 	[año_publicacion] VARCHAR(20) NOT NULL,
