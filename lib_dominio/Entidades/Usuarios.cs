@@ -18,8 +18,7 @@ namespace lib_dominio.Entidades
         public string? telefono { get; set; }
         public int id_roles { get; set; }
 
-        [ForeignKey("id_roles")]
-        public Roles? Roles { get; set; } //PREGUNTAR SI SE PUEDE
+        [ForeignKey("id_roles")] public Roles? _Roles { get; set; } 
         //public Roles? _id_roles { get; set; }
     }
 }
