@@ -3,6 +3,7 @@ using lib_dominio.Nucleo;
 using lib_presentaciones.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.IO;
 
 namespace asp_presentacion.Pages.Ventanas
 {
@@ -108,7 +109,18 @@ namespace asp_presentacion.Pages.Ventanas
         {
             try
             {
+
                 Accion = Enumerables.Ventanas.Editar;
+
+                if (FormFile != null)
+                {
+
+                    var memoryStream = new MemoryStream();
+                    FormFile.CopyToAsync(memoryStream).Wait();
+                    Actual!.imagen = EncodingHelper.ToString(memoryStream.ToArray());
+                    memoryStream.Dispose();
+
+                }
 
                 Task<Libros>? task = null;
                 if (Actual!.id == 0)
@@ -125,6 +137,7 @@ namespace asp_presentacion.Pages.Ventanas
                 LogConversor.Log(ex, ViewData!);
             }
         }
+
 
         public virtual void OnPostBtBorrarVal(string data)
         {

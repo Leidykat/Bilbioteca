@@ -13,6 +13,7 @@ namespace lib_dominio.Entidades
 
         public int id { get; set; }
         public string? titulo { get; set; }
+        public string? imagen { get; set; }
         public int cantidad { get; set; }
         public string? estado { get; set; }
         public string? año_publicacion { get; set; }

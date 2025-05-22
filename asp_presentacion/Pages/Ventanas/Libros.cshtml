@@ -6,56 +6,58 @@
 <center>
     <div>
         <form method="POST"
-              enctype="multipart/form-data">
+        enctype="multipart/form-data">
             @Html.AntiForgeryToken()
 
             <div align="left">
                 <h3>Libros</h3>
             </div>
             <div align="left"
-                 class="bt_panel_buttons">
+            class="bt_panel_buttons">
                 <input type="submit"
-                       value="Refrescar"
-                       asp-page-handler="BtRefrescar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Refrescar"
+                asp-page-handler="BtRefrescar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Nuevo"
-                       asp-page-handler="BtNuevo"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Nuevo"
+                asp-page-handler="BtNuevo"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Guardar"
-                       asp-page-handler="BtGuardar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Guardar"
+                asp-page-handler="BtGuardar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                       value="Cancelar"
-                       asp-page-handler="BtCancelar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                value="Cancelar"
+                asp-page-handler="BtCancelar"
+                class="btn btn-secondary"
+                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
             </div>
 
             @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+              Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.id" />
+                asp-for="@Model.Actual!.id" />
             }
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input type="hidden"
-                       asp-for="@Model.Actual!.titulo" />
+                asp-for="@Model.Actual!.titulo" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.cantidad" />
+                       asp-for="@Model.Actual!.imagen" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.estado" />
+                asp-for="@Model.Actual!.cantidad" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.año_publicacion" />
+                asp-for="@Model.Actual!.estado" />
                 <input type="hidden"
-                       asp-for="@Model.Actual!.id_editoriales " />
+                asp-for="@Model.Actual!.año_publicacion" />
+                <input type="hidden"
+                asp-for="@Model.Actual!.id_editoriales " />
 
-                
+
             }
 
             @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
@@ -70,9 +72,25 @@
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmTitulo"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.titulo" />
+                                class="cts_forms form-control"
+                                asp-for="@Model.Actual!.titulo" />
                             </div>
+                        </div>
+
+                        <div class=" col-lg-6">
+                            <label class="col-lg-4 control-label">
+                                Imagen
+                            </label>
+                            @if (Model.Actual!.imagen!= null)
+                            {
+                                <img height="100"
+                                width="100"
+                                src="data:image;base64.
+                                       @System.Convert.ToBase64String(lib_dominio.Nucleo.EncodingHelper.ToBytes(Model.Actual!.imagen))"/>
+                            }
+
+                            <input type="file" class="form-control" asp-for="FormFile"/>
+
                         </div>
                         <div class="form-group">
                             <label class="col-lg-4 control-label">
@@ -80,8 +98,8 @@
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmCantidad"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.cantidad" />
+                                class="cts_forms form-control"
+                                asp-for="@Model.Actual!.cantidad" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -90,18 +108,18 @@
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmEstado"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.estado" />
+                                class="cts_forms form-control"
+                                asp-for="@Model.Actual!.estado" />
                             </div>
                         </div>
-                            <div class="form-group">
+                        <div class="form-group">
                             <label class="col-lg-4 control-label">
                                 Año de publicacion
                             </label>
                             <div class="col-lg-6">
                                 <input id="nmAñoPublicacion"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.año_publicacion" />
+                                class="cts_forms form-control"
+                                asp-for="@Model.Actual!.año_publicacion" />
                             </div>
                         </div>
                         <div class="form-group">
@@ -110,14 +128,14 @@
                             </label>
                             <div class="col-lg-6">
                                 <select id="nmEditorial"
-                                        class="form-control"
-                                        asp-for="@Model.Actual!.id_editoriales"
-                                        asp-items="@(new SelectList(Model.Editoriales, "id", "nombre"))">
+                                class="form-control"
+                                asp-for="@Model.Actual!.id_editoriales"
+                                asp-items="@(new SelectList(Model.Editoriales, "id", "nombre"))">
                                 </select>
                             </div>
                         </div>
 
-                     
+
                     </div>
                 </div>
             }
@@ -125,7 +143,7 @@
             @if (ViewData.ContainsKey("Mensaje"))
             {
                 <input type="hidden"
-                       asp-for="@Model.Accion" />
+                asp-for="@Model.Accion" />
                 @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
                 ;
             }
@@ -149,13 +167,13 @@
                             <br />
                             <br />
                             <input type="submit"
-                                   value="Borrar"
-                                   asp-page-handler="BtBorrar"
-                                   class="btn btn-secondary" />
+                            value="Borrar"
+                            asp-page-handler="BtBorrar"
+                            class="btn btn-secondary" />
                             <input type="submit"
-                                   value="Cerrar"
-                                   asp-page-handler="BtCancelar"
-                                   class="btn btn-secondary" />
+                            value="Cerrar"
+                            asp-page-handler="BtCancelar"
+                            class="btn btn-secondary" />
                         </div>
                     </div>
                 </div>
@@ -165,9 +183,9 @@
             Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
                 <input id="flNombre"
-                       class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.id"
-                       placeholder="Nombre" />
+                class="cts_forms form-control"
+                asp-for="@Model.Filtro!.id"
+                placeholder="Nombre" />
                 <br />
 
                 <div class="containers_vn panel panel-default">
@@ -176,7 +194,10 @@
                             <th>
                                 Título
                             </th>
-                              <th>
+                            <th>
+                                Imagen
+                            </th>
+                            <th>
                                 Cantidad
                             </th>
                             <th>
@@ -197,6 +218,17 @@
                                     <td>
                                         @elemento.titulo
                                     </td>
+
+                                    <td class="cl_hidden">
+                                        @if (elemento.imagen != null)
+                                        {
+                                            <img height="60"
+                                                width="60"
+                                                src ="data:image;base64,
+                                                 @System.Convert.ToBase64String(lib_dominio.Nucleo.EncodingHelper.ToBytes(elemento.imagen))" />
+                                        }
+                                    </td>
+
                                     <td>
                                         @elemento.cantidad
                                     </td>
