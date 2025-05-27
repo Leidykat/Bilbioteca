@@ -15,27 +15,31 @@
             <div align="left"
             class="bt_panel_buttons">
                 <input type="submit"
-                value="Refrescar"
-                asp-page-handler="BtRefrescar"
-                class="btn btn-secondary"
-                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                    value="Refrescar"
+                    asp-page-handler="BtRefrescar"
+                    class="btn btn-secondary"
+                    disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                value="Nuevo"
-                asp-page-handler="BtNuevo"
-                class="btn btn-secondary"
-                disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                    value="Nuevo"
+                    asp-page-handler="BtNuevo"
+                    class="btn btn-secondary"
+                    disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                value="Guardar"
-                asp-page-handler="BtGuardar"
-                class="btn btn-secondary"
-                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                    value="Guardar"
+                    asp-page-handler="BtGuardar"
+                    class="btn btn-secondary"
+                    disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
                 <input type="submit"
-                value="Cancelar"
-                asp-page-handler="BtCancelar"
-                class="btn btn-secondary"
-                disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                    value="Cancelar"
+                    asp-page-handler="BtCancelar"
+                    class="btn btn-secondary"
+                    disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                <input type="button"
+                       id="generate-pdf"
+                       class="btn btn-secondary"
+                       value="Generar PDF" />
             </div>
-
+        <div id="content-to-pdf">
             @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
               Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
             {
@@ -259,7 +263,40 @@
                     </table>
                 </div>
             }
+        </div>
         </form>
     </div>
 </center>
+@section Scripts {
+    <script>
+        document.getElementById("generate-pdf").addEventListener("click", async () => {
+            try {
+                const { jsPDF } = window.jspdf;
 
+                // Captura el contenido del div
+                const content = document.getElementById("content-to-pdf");
+
+                if (!content) {
+                    throw new Error("No se encontró el contenido para generar el PDF.");
+                }
+
+                // Convierte el contenido a una imagen
+                const canvas = await html2canvas(content);
+                const imgData = canvas.toDataURL("image/png");
+
+                // Crea un PDF
+                const pdf = new jsPDF("p", "mm", "a4");
+                const imgWidth = 190; // Ancho del PDF
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+
+                // Descarga el PDF
+                pdf.save("Libros.pdf");
+            } catch (error) {
+                console.error("Error generando el PDF:", error);
+                alert("Ocurrió un error al generar el PDF. Por favor, verifica los datos y vuelve a intentarlo.");
+            }
+        });
+    </script>
+}
