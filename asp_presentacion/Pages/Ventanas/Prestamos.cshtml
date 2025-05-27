@@ -9,211 +9,253 @@
               enctype="multipart/form-data">
             @Html.AntiForgeryToken()
 
-            <div align="left">
-                <h3>Prestamos</h3>
-            </div>
-            <div align="left"
-                 class="bt_panel_buttons">
-                <input type="submit"
-                       value="Refrescar"
-                       asp-page-handler="BtRefrescar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
-                <input type="submit"
-                       value="Nuevo"
-                       asp-page-handler="BtNuevo"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
-                <input type="submit"
-                       value="Guardar"
-                       asp-page-handler="BtGuardar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
-                <input type="submit"
-                       value="Cancelar"
-                       asp-page-handler="BtCancelar"
-                       class="btn btn-secondary"
-                       disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
-            </div>
+           
+                <div align="left">
+                    <h3>Prestamos</h3>
+                </div>
+                <div align="left"
+                     class="bt_panel_buttons">
+                    <input type="submit"
+                           value="Refrescar"
+                           asp-page-handler="BtRefrescar"
+                           class="btn btn-secondary"
+                           disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                    <input type="submit"
+                           value="Nuevo"
+                           asp-page-handler="BtNuevo"
+                           class="btn btn-secondary"
+                           disabled="@(Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                    <input type="submit"
+                           value="Guardar"
+                           asp-page-handler="BtGuardar"
+                           class="btn btn-secondary"
+                           disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
+                    <input type="submit"
+                           value="Cancelar"
+                           asp-page-handler="BtCancelar"
+                           class="btn btn-secondary"
+                           disabled="@(Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas)" />
 
-            @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-            Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
-                <input type="hidden"
-                       asp-for="@Model.Actual!.id" />
-            }
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
-                <input type="hidden"
-                       asp-for="@Model.Actual!.codigo" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.fecha_prestamo" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.fecha_devolucion" />
-                <input type="hidden"
-                       asp-for="@Model.Actual!.id_usuarios" />
+                    <input type="button"
+                           id="generate-pdf"
+                           class="btn btn-secondary"
+                           value="Generar PDF" />
+                </div>
+
+            <div id="content-to-pdf">
+                    @if (Model.Accion != lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
+                    Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                    {
+                        <input type="hidden"
+                               asp-for="@Model.Actual!.id" />
+                    }
+                    @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                    {
+                        <input type="hidden"
+                               asp-for="@Model.Actual!.codigo" />
+                        <input type="hidden"
+                               asp-for="@Model.Actual!.fecha_prestamo" />
+                        <input type="hidden"
+                               asp-for="@Model.Actual!.fecha_devolucion" />
+                        <input type="hidden"
+                               asp-for="@Model.Actual!.id_usuarios" />
         
 
-            }
+                    }
 
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
-            {
-                <div class="containers_vn panel panel-default">
-                    <h3>Prestamos</h3>
+                    @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Editar)
+                    {
+                        <div class="containers_vn panel panel-default">
+                            <h3>Prestamos</h3>
 
-                    <div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Código
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmCodigo"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.codigo" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Fecha prestamo
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmFechaPrestamo"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.fecha_prestamo" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Fecha devolución
-                            </label>
-                            <div class="col-lg-6">
-                                <input id="nmFechaDevolucion"
-                                       class="cts_forms form-control"
-                                       asp-for="@Model.Actual!.fecha_devolucion" />
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-lg-4 control-label">
-                                Usuarios
-                            </label>
-                            <div class="col-lg-6">
-                                <select id="nmUsuarios"
-                                        class="form-control"
-                                        asp-for="@Model.Actual!.id_usuarios"
-                                        asp-items="@(new SelectList(Model.Usuarios, "id", "correo"))">
-                                </select>
-                            </div>
-                        </div>
+                            <div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">
+                                        Código
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input id="nmCodigo"
+                                               class="cts_forms form-control"
+                                               asp-for="@Model.Actual!.codigo" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">
+                                        Fecha prestamo
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input id="nmFechaPrestamo"
+                                               class="cts_forms form-control"
+                                               asp-for="@Model.Actual!.fecha_prestamo" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">
+                                        Fecha devolución
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input id="nmFechaDevolucion"
+                                               class="cts_forms form-control"
+                                               asp-for="@Model.Actual!.fecha_devolucion" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-4 control-label">
+                                        Usuarios
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <select id="nmUsuarios"
+                                                class="form-control"
+                                                asp-for="@Model.Actual!.id_usuarios"
+                                                asp-items="@(new SelectList(Model.Usuarios, "id", "correo"))">
+                                        </select>
+                                    </div>
+                                </div>
                    
 
-                    </div>
-                </div>
-            }
+                            </div>
+                        </div>
+                    }
 
-            @if (ViewData.ContainsKey("Mensaje"))
-            {
-                <input type="hidden"
-                       asp-for="@Model.Accion" />
-                @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
-                ;
-            }
+                @if (ViewData.ContainsKey("Mensaje"))
+                {
+                    <input type="hidden"
+                           asp-for="@Model.Accion" />
+                    @await Html.PartialAsync("../Emergentes/Mensajes.cshtml")
+                    ;
+                }
 
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
-                <div class='popup'>
-                    <div class='pp_del_inner'>
-                        <div style='width:95%'>
-                            <h2 align="left">
-                                Mensaje
-                            </h2>
+                @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                {
+                    <div class='popup'>
+                        <div class='pp_del_inner'>
+                            <div style='width:95%'>
+                                <h2 align="left">
+                                    Mensaje
+                                </h2>
 
-                            <h4 align="left">
-                                Desea borrar la entidad?
-                            </h4>
-                            <h6 align="left">
-                                @Model.Actual!.id,
-                                @Model.Actual!.codigo
-                            </h6>
-                            <br />
-                            <br />
-                            <input type="submit"
-                                   value="Borrar"
-                                   asp-page-handler="BtBorrar"
-                                   class="btn btn-secondary" />
-                            <input type="submit"
-                                   value="Cerrar"
-                                   asp-page-handler="BtCancelar"
-                                   class="btn btn-secondary" />
+                                <h4 align="left">
+                                    Desea borrar la entidad?
+                                </h4>
+                                <h6 align="left">
+                                    @Model.Actual!.id,
+                                    @Model.Actual!.codigo
+                                </h6>
+                                <br />
+                                <br />
+                                <input type="submit"
+                                       value="Borrar"
+                                       asp-page-handler="BtBorrar"
+                                       class="btn btn-secondary" />
+                                <input type="submit"
+                                       value="Cerrar"
+                                       asp-page-handler="BtCancelar"
+                                       class="btn btn-secondary" />
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
 
-            @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
-            Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
-            {
-                <input id="flCodigo"
-                       class="cts_forms form-control"
-                       asp-for="@Model.Filtro!.codigo"
-                       placeholder="Codigo" />
-                <br />
+                @if (Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Listas ||
+                Model.Accion == lib_dominio.Nucleo.Enumerables.Ventanas.Borrar)
+                {
+                    <input id="flCodigo"
+                           class="cts_forms form-control"
+                           asp-for="@Model.Filtro!.codigo"
+                           placeholder="Codigo" />
+                    <br />
 
-                <div class="containers_vn panel panel-default">
-                    <table class="tb_data table table-striped table-bordered table-hover">
-                        <tr>
-                            <th>
-                                Codigo
-                            </th>
-                            <th>
-                                Fecha prestamo
-                            </th>
+                    <div class="containers_vn panel panel-default">
+                        <table class="tb_data table table-striped table-bordered table-hover">
+                            <tr>
+                                <th>
+                                    Codigo
+                                </th>
+                                <th>
+                                    Fecha prestamo
+                                </th>
                            
-                            <th class="cl_hidden">
-                                Fecha devolucion  
-                            </th>
-                            <th class="cl_actions">
-                                Usuarios
-                            </th>
-                        </tr>
-                        @if (Model != null && Model.Lista != null)
-                        {
-                            @foreach (var elemento in Model.Lista)
+                                <th class="cl_hidden">
+                                    Fecha devolucion  
+                                </th>
+                                <th class="cl_actions">
+                                    Usuarios
+                                </th>
+                            </tr>
+                            @if (Model != null && Model.Lista != null)
                             {
-                                <tr>
-                                    <td>
-                                        @elemento.codigo
-                                    </td>
-                                    <td>
-                                        @elemento.fecha_prestamo
-                                    </td>
+                                @foreach (var elemento in Model.Lista)
+                                {
+                                    <tr>
+                                        <td>
+                                            @elemento.codigo
+                                        </td>
+                                        <td>
+                                            @elemento.fecha_prestamo
+                                        </td>
                                 
-                                    <td class="cl_hidden">
-                                        @elemento.fecha_devolucion
-                                    </td>
-                                    <td class="cl_hidden">
-                                        @elemento._usuarios!.correo
-                                    </td>
+                                        <td class="cl_hidden">
+                                            @elemento.fecha_devolucion
+                                        </td>
+                                        <td class="cl_hidden">
+                                            @elemento._usuarios!.correo
+                                        </td>
 
-                                    <td>
-                                        <input type="submit"
-                                               value="Modicar"
-                                               asp-page-handler="BtModificar"
-                                               class="btn btn-secondary"
-                                               asp-route-data="@elemento.id" />
-                                        <input type="submit"
-                                               value="Borrar"
-                                               asp-page-handler="BtBorrarVal"
-                                               class="btn btn-secondary"
-                                               asp-route-data="@elemento.id" />
-                                    </td>
-                                </tr>
+                                        <td>
+                                            <input type="submit"
+                                                   value="Modicar"
+                                                   asp-page-handler="BtModificar"
+                                                   class="btn btn-secondary"
+                                                   asp-route-data="@elemento.id" />
+                                            <input type="submit"
+                                                   value="Borrar"
+                                                   asp-page-handler="BtBorrarVal"
+                                                   class="btn btn-secondary"
+                                                   asp-route-data="@elemento.id" />
+                                        </td>
+                                    </tr>
+                                }
                             }
-                        }
-                    </table>
-                </div>
-            }
+                        </table>
+                    </div>
+                }
+            </div>
         </form>
     </div>
 </center>
+
+@section Scripts {
+    <script>
+        document.getElementById("generate-pdf").addEventListener("click", async () => {
+            try {
+                const { jsPDF } = window.jspdf;
+
+                // Captura el contenido del div
+                const content = document.getElementById("content-to-pdf");
+
+                if (!content) {
+                    throw new Error("No se encontró el contenido para generar el PDF.");
+                }
+
+                // Convierte el contenido a una imagen
+                const canvas = await html2canvas(content);
+                const imgData = canvas.toDataURL("image/png");
+
+                // Crea un PDF
+                const pdf = new jsPDF("p", "mm", "a4");
+                const imgWidth = 190; // Ancho del PDF
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+                pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+
+                // Descarga el PDF
+                pdf.save("Prestamos.pdf");
+            } catch (error) {
+                console.error("Error generando el PDF:", error);
+                alert("Ocurrió un error al generar el PDF. Por favor, verifica los datos y vuelve a intentarlo.");
+            }
+        });
+    </script>
+}
 
 
