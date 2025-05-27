@@ -159,4 +159,3 @@ INSERT INTO [Libros_Generos] ([id_libros],	[id_Generos])
 VALUES ( 2, 2);
 GO
 
-select *from Auditorias
