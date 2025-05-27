@@ -80,6 +80,7 @@ namespace asp_presentacion.Pages.Ventanas
             {
                 Accion = Enumerables.Ventanas.Editar;
                 Actual = new Prestamos();
+                CargarCombox();
             }
             catch (Exception ex)
             {

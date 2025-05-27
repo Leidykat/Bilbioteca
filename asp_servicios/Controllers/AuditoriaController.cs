@@ -55,38 +55,8 @@ namespace asp_servicios.Controllers
             }
         }
 
-        //[HttpPost]
-        //public string PorCodigo()
-        //{
-        //    var respuesta = new Dictionary<string, object>();
-        //    try
-        //    {
-        //        var datos = ObtenerDatos();
-        //        if (!tokenController!.Validate(datos))
-        //        {
-        //            respuesta["Error"] = "lbNoAutenticacion";
-        //            return JsonConversor.ConvertirAString(respuesta);
-        //        }
-
-        //        var entidad = JsonConversor.ConvertirAObjeto<Auditorias>(
-        //            JsonConversor.ConvertirAString(datos["Entidad"]));
-
-        //        this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion")!);
-        //        respuesta["Entidades"] = this.iAplicacion!.PorCodigo(entidad);
-
-        //        respuesta["Respuesta"] = "OK";
-        //        respuesta["Fecha"] = DateTime.Now.ToString();
-        //        return JsonConversor.ConvertirAString(respuesta);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        respuesta["Error"] = ex.Message.ToString();
-        //        return JsonConversor.ConvertirAString(respuesta);
-        //    }
-        //}
-
         [HttpPost]
-        public string Guardar()
+        public string PorTabla()
         {
             var respuesta = new Dictionary<string, object>();
             try
@@ -102,9 +72,8 @@ namespace asp_servicios.Controllers
                     JsonConversor.ConvertirAString(datos["Entidad"]));
 
                 this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion")!);
-                entidad = this.iAplicacion!.Guardar(entidad);
+                respuesta["Entidades"] = this.iAplicacion!.PorTabla(entidad);
 
-                respuesta["Entidad"] = entidad!;
                 respuesta["Respuesta"] = "OK";
                 respuesta["Fecha"] = DateTime.Now.ToString();
                 return JsonConversor.ConvertirAString(respuesta);
@@ -116,66 +85,5 @@ namespace asp_servicios.Controllers
             }
         }
 
-        [HttpPost]
-        public string Modificar()
-        {
-            var respuesta = new Dictionary<string, object>();
-            try
-            {
-                var datos = ObtenerDatos();
-                if (!tokenController!.Validate(datos))
-                {
-                    respuesta["Error"] = "lbNoAutenticacion";
-                    return JsonConversor.ConvertirAString(respuesta);
-                }
-
-                var entidad = JsonConversor.ConvertirAObjeto<Auditorias>(
-                    JsonConversor.ConvertirAString(datos["Entidad"]));
-
-                this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion")!);
-                entidad = this.iAplicacion!.Modificar(entidad);
-
-                respuesta["Entidad"] = entidad!;
-                respuesta["Respuesta"] = "OK";
-                respuesta["Fecha"] = DateTime.Now.ToString();
-                return JsonConversor.ConvertirAString(respuesta);
-            }
-            catch (Exception ex)
-            {
-                respuesta["Error"] = ex.Message.ToString();
-                return JsonConversor.ConvertirAString(respuesta);
-            }
-        }
-
-        [HttpPost]
-        public string Borrar()
-        {
-            var respuesta = new Dictionary<string, object>();
-            try
-            {
-                var datos = ObtenerDatos();
-                if (!tokenController!.Validate(datos))
-                {
-                    respuesta["Error"] = "lbNoAutenticacion";
-                    return JsonConversor.ConvertirAString(respuesta);
-                }
-
-                var entidad = JsonConversor.ConvertirAObjeto<Auditorias>(
-                    JsonConversor.ConvertirAString(datos["Entidad"]));
-
-                this.iAplicacion!.Configurar(Configuracion.ObtenerValor("StringConexion")!);
-                entidad = this.iAplicacion!.Borrar(entidad);
-
-                respuesta["Entidad"] = entidad!;
-                respuesta["Respuesta"] = "OK";
-                respuesta["Fecha"] = DateTime.Now.ToString();
-                return JsonConversor.ConvertirAString(respuesta);
-            }
-            catch (Exception ex)
-            {
-                respuesta["Error"] = ex.Message.ToString();
-                return JsonConversor.ConvertirAString(respuesta);
-            }
-        }
     }
 }

@@ -47,7 +47,7 @@ GO
 CREATE TABLE [Libros] (
 	[id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[titulo] NVARCHAR(50) NOT NULL,
-	[imagen] NVARCHAR(200),
+	[imagen] NVARCHAR(MAX),
 	[cantidad] INT NOT NULL,
 	[estado] NVARCHAR(50) NOT NULL,
 	[año_publicacion] VARCHAR(20) NOT NULL,
@@ -85,6 +85,14 @@ CREATE TABLE [Libros_Generos] (
 	[id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
 	[id_libros] INT NOT NULL REFERENCES [Libros] ([id]),
 	[id_Generos] INT NOT NULL REFERENCES [Generos] ([id])
+);
+GO
+
+CREATE TABLE [Auditorias] (
+	[id] INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+	[fecha] DATETIME NOT NULL DEFAULT GETDATE(),
+	[tabla] NVARCHAR(50) NOT NULL,
+	[accion] NVARCHAR(50) NOT NULL,
 );
 GO
 
@@ -151,7 +159,4 @@ INSERT INTO [Libros_Generos] ([id_libros],	[id_Generos])
 VALUES ( 2, 2);
 GO
 
-select *from Editoriales
-
-
---HACER TABLA DE AUDITORIAS 
+select *from Auditorias

@@ -28,6 +28,7 @@ namespace lib_aplicaciones.Implementaciones
                 throw new Exception("lbNoSeGuardo");
 
             this.IConexion!.Generos!.Remove(entidad);
+            GuardarAuditoria("Borrar Género");
             this.IConexion.SaveChanges();
             return entidad;
         }
@@ -40,20 +41,15 @@ namespace lib_aplicaciones.Implementaciones
             if (entidad.id != 0)
                 throw new Exception("lbYaSeGuardo");
 
-            /*entidad!.NotaFinal = 
-                (entidad.Nota1 + 
-                entidad.Nota2 + 
-                entidad.Nota3 + 
-                entidad.Nota4 + 
-                entidad.Nota5) / 5;*/
-
             this.IConexion!.Generos!.Add(entidad);
+            GuardarAuditoria("Guardar Género");
             this.IConexion.SaveChanges();
             return entidad;
         }
 
         public List<Generos> Listar()
         {
+            GuardarAuditoria("Listar Género");
             return this.IConexion!.Generos!.Take(20).ToList();
         }
 
@@ -69,19 +65,24 @@ namespace lib_aplicaciones.Implementaciones
             if (entidad!.id == 0)
                 throw new Exception("lbNoSeGuardo");
 
-            /*entidad!.NotaFinal =
-                (entidad.Nota1 + 
-                entidad.Nota2 + 
-                entidad.Nota3 + 
-                entidad.Nota4 + 
-                entidad.Nota5) / 5;
-            CALCULOS
-            */
-
             var entry = this.IConexion!.Entry<Generos>(entidad);
             entry.State = EntityState.Modified;
+            GuardarAuditoria("Modificar Género");
             this.IConexion.SaveChanges();
             return entidad;
+        }
+
+        public void GuardarAuditoria(string? accion)
+        {
+            var conexion = this.IConexion!.Auditorias;
+            var entidad = new Auditorias()
+            {
+                accion = accion,
+                tabla = "Géneros",
+                fecha = DateTime.Now
+            };
+            this.IConexion.Auditorias!.Add(entidad);
+            this.IConexion.SaveChanges();
         }
     }
 }

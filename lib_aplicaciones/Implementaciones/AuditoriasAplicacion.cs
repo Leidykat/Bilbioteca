@@ -19,69 +19,16 @@ namespace lib_aplicaciones.Implementaciones
             this.IConexion!.StringConexion = StringConexion; 
         }
 
-        public Auditorias? Borrar(Auditorias? entidad)
-        {
-            if (entidad == null) 
-                throw new Exception("lbFaltaInformacion");
-
-            if (entidad!.id == 0) 
-                throw new Exception("lbNoSeGuardo");
-
-            this.IConexion!.Auditorias!.Remove(entidad); 
-            this.IConexion.SaveChanges(); 
-            return entidad;
-        }
-
-        public Auditorias? Guardar(Auditorias? entidad)
-        {
-            if (entidad == null) 
-                throw new Exception("lbFaltaInformacion");
-
-            if (entidad.id != 0) 
-                throw new Exception("lbYaSeGuardo");
-
-            /*entidad!.NotaFinal = 
-                (entidad.Nota1 + 
-                entidad.Nota2 + 
-                entidad.Nota3 + 
-                entidad.Nota4 + 
-                entidad.Nota5) / 5;*/
-
-            this.IConexion!.Auditorias!.Add(entidad); 
-            this.IConexion.SaveChanges(); 
-            return entidad;
-        }
 
         public List<Auditorias> Listar() 
         { 
-            return this.IConexion!.Auditorias!.Take(20).ToList(); 
+            return this.IConexion!.Auditorias!.ToList(); 
         }
 
-        public List<Auditorias> PorUsuario(Auditorias? entidad) 
+        public List<Auditorias> PorTabla(Auditorias? entidad) 
         { 
-            return this.IConexion!.Auditorias!.Where(x => x.Usuarios!.Contains(entidad!.Usuarios!)).ToList(); 
+            return this.IConexion!.Auditorias!.Where(x => x.tabla!.Contains(entidad!.tabla!)).ToList(); 
         }
 
-        public Auditorias? Modificar(Auditorias? entidad)
-        {
-            if (entidad == null) 
-                throw new Exception("lbFaltaInformacion");
-            if (entidad!.id == 0) 
-                throw new Exception("lbNoSeGuardo");
-
-            /*entidad!.NotaFinal =
-                (entidad.Nota1 + 
-                entidad.Nota2 + 
-                entidad.Nota3 + 
-                entidad.Nota4 + 
-                entidad.Nota5) / 5;
-            CALCULOS
-            */
-
-            var entry = this.IConexion!.Entry<Auditorias>(entidad); 
-            entry.State = EntityState.Modified; 
-            this.IConexion.SaveChanges(); 
-            return entidad;
-        }
     }
 }

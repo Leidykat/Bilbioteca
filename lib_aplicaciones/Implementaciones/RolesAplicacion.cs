@@ -33,6 +33,7 @@ namespace lib_aplicaciones.Implementaciones
                 throw new Exception("lbNoSeGuardo");
 
             this.IConexion!.Roles!.Remove(entidad);
+            GuardarAuditoria("Borrar Rol");
             this.IConexion.SaveChanges();
             return entidad;
         }
@@ -45,20 +46,15 @@ namespace lib_aplicaciones.Implementaciones
             if (entidad.id != 0)
                 throw new Exception("lbYaSeGuardo");
 
-            /*entidad!.NotaFinal = 
-                (entidad.Nota1 + 
-                entidad.Nota2 + 
-                entidad.Nota3 + 
-                entidad.Nota4 + 
-                entidad.Nota5) / 5;*/
-
             this.IConexion!.Roles!.Add(entidad);
+            GuardarAuditoria("Guardar Rol");
             this.IConexion.SaveChanges();
             return entidad;
         }
 
         public List<Roles> Listar()
         {
+            GuardarAuditoria("Listar Rol");
             return this.IConexion!.Roles!.Take(20).ToList();
         }
 
@@ -74,19 +70,23 @@ namespace lib_aplicaciones.Implementaciones
             if (entidad!.id == 0)
                 throw new Exception("lbNoSeGuardo");
 
-            /*entidad!.NotaFinal =
-                (entidad.Nota1 + 
-                entidad.Nota2 + 
-                entidad.Nota3 + 
-                entidad.Nota4 + 
-                entidad.Nota5) / 5;
-            CALCULOS
-            */
-
             var entry = this.IConexion!.Entry<Roles>(entidad);
             entry.State = EntityState.Modified;
+            GuardarAuditoria("Modificar Rol");
             this.IConexion.SaveChanges();
             return entidad;
+        }
+        public void GuardarAuditoria(string? accion)
+        {
+            var conexion = this.IConexion!.Auditorias;
+            var entidad = new Auditorias()
+            {
+                accion = accion,
+                tabla = "Roles",
+                fecha = DateTime.Now
+            };
+            this.IConexion.Auditorias!.Add(entidad);
+            this.IConexion.SaveChanges();
         }
     }
 }
