@@ -12,12 +12,8 @@ namespace lib_dominio.Entidades
         public int id { get; set; }
         public DateTime fecha { get; set; }
         public string? tabla { get; set; }
-        public string? referencia { get; set; }//SERIA EL ID 
         public string? accion { get; set; }
 
-        public string? Usuarios { get; set; } //ESTO SI DEBE IR 
-
-       //prueba
 
     }
 }

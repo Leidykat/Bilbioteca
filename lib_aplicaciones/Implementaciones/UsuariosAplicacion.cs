@@ -33,6 +33,7 @@ namespace lib_aplicaciones.Implementaciones
                 throw new Exception("lbNoSeGuardo");
 
             this.IConexion!.Usuarios!.Remove(entidad);
+            GuardarAuditoria("Borrar Usuario");
             this.IConexion.SaveChanges();
             return entidad;
         }
@@ -45,20 +46,15 @@ namespace lib_aplicaciones.Implementaciones
             if (entidad.id != 0)
                 throw new Exception("lbYaSeGuardo");
 
-            /*entidad!.NotaFinal = 
-                (entidad.Nota1 + 
-                entidad.Nota2 + 
-                entidad.Nota3 + 
-                entidad.Nota4 + 
-                entidad.Nota5) / 5;*/
-
             this.IConexion!.Usuarios!.Add(entidad);
+            GuardarAuditoria("Guardar Usuario");
             this.IConexion.SaveChanges();
             return entidad;
         }
 
         public List<Usuarios> Listar()
         {
+            GuardarAuditoria("Listar Usuario");
             return this.IConexion!.Usuarios!.Take(20).Include(x => x._Roles).ToList();
         }
 
@@ -74,19 +70,23 @@ namespace lib_aplicaciones.Implementaciones
             if (entidad!.id == 0)
                 throw new Exception("lbNoSeGuardo");
 
-            /*entidad!.NotaFinal =
-                (entidad.Nota1 + 
-                entidad.Nota2 + 
-                entidad.Nota3 + 
-                entidad.Nota4 + 
-                entidad.Nota5) / 5;
-            CALCULOS
-            */
-
             var entry = this.IConexion!.Entry<Usuarios>(entidad);
             entry.State = EntityState.Modified;
+            GuardarAuditoria("Modificar Usuario");
             this.IConexion.SaveChanges();
             return entidad;
+        }
+        public void GuardarAuditoria(string? accion)
+        {
+            var conexion = this.IConexion!.Auditorias;
+            var entidad = new Auditorias()
+            {
+                accion = accion,
+                tabla = "Usuarios",
+                fecha = DateTime.Now
+            };
+            this.IConexion.Auditorias!.Add(entidad);
+            this.IConexion.SaveChanges();
         }
     }
 }
